@@ -22,6 +22,7 @@ class BST
 {
 public:
     node* root;
+    node*parent;
 
     BST()
     {
@@ -48,11 +49,80 @@ public:
         return root;
     }
     
-    node*delet(node*root,int ele)
+    void delet(node*root,int ele)
     {
-        
+        while(root!=NULL)
+        {
+            if(ele>root->data)
+            {
+                parent=root;
+                root=root->right;
+            }
+            else if(ele<root->data)
+            {
+                parent=root;
+                root=root->left;
+            }
+            else if(ele==root->data)
+            {
+                if(root->left==NULL&&root->right==NULL)
+                {
+                    if(parent->left==root)
+                    {
+                        delete root;
+                        parent->left=NULL;
+                        return;
+                    }
+                    else if(parent->right==root)
+                    {
+                        delete root;
+                        parent->right=NULL;
+                        return;
+                    }
+                }
+
+                if(root->left==NULL)
+                {
+                    if(parent->left==root)
+                    {
+                        parent->left=root->right;
+                        delete root;
+                        return;
+                    }
+                    else if(parent->right==root)
+                    {
+                        parent->right=root->right;
+                        delete root;
+                        return;
+                    }
+                }
+                else if(root->right==NULL)
+                {
+                    if(parent->left==root)
+                    {
+                        parent->left=root->left;
+                        delete root;
+                        return;
+                    }
+                    else if(parent->right==root)
+                    {
+                        parent->right=root->left;
+                        delete root;
+                        return;
+                    }
+                }
+                else if(root->left!=NULL&&root->right!=NULL)
+                {
+                    node*n=min(root->right);
+                    n->data=root->data;
+                    delet(n,n->data);
+                    return;
+                }
+            }
+        }
+
     }
-    node* min(node* root)
+   node* min(node* root)
     {
         if (root->left != NULL)
         {
@@ -60,6 +130,7 @@ public:
         }
         return root;
     }
+
 
     int longest(node* root)
     {
@@ -80,8 +151,8 @@ public:
         }
         swap(root->left, root->right);
         mirror(root->left);
+        cout<<root->data<<" ";
         mirror(root->right);
-        display(root);
     }
 
     node* search(node* root, int ele)
@@ -139,18 +210,24 @@ int main()
             cin>>ele;
             b.delet(b.root,ele);
             break;
-            break;
         case 3:
             b.display(b.root);
+            cout<<endl;
             break;
         case 4:
             b.mirror(b.root);
+            cout<<endl;
             break;
         case 5:
             cout<<"Height of tree is : "<<b.longest(b.root)<<endl;
             break;
         case 6:
-            cout<<"Minimum value in tree is: "<<b.min(b.root)<<endl;
+            node* min_val=b.min(b.root);
+           if(min_val!=NULL)
+           {
+             cout<<"Minimum value in tree is: "<<min_val->data<<endl;
+           }
+           else{cout<<"Tree is empty"<<endl;}
             break;
         case 7:
             cout<<"Enter element to search:"<<endl;
