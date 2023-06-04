@@ -296,7 +296,8 @@ int main()
                 cout<<"3.Counter Of Set"<<endl;
                 cout<<"4.Count elements"<<endl;
                 cout<<"5.Check for element"<<endl;
-                cout<<"6.Back"<<endl;
+                cout<<"6.Display Set"<<endl;
+                cout<<"7.Back"<<endl;
                 cin>>ch2;
                 switch (ch2)
                 {
