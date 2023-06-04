@@ -39,6 +39,7 @@
     "c": "c",
     "*.html": "django-html",
     "*.py": "python",
-    "new": "cpp"
+    "new": "cpp",
+    "iostream": "cpp"
   }
 }
