@@ -47,7 +47,11 @@ public:
         }
         return root;
     }
-
+    
+    node*delet(node*root,int ele)
+    {
+        
+    }
     node* min(node* root)
     {
         if (root->left != NULL)
@@ -77,6 +81,7 @@ public:
         swap(root->left, root->right);
         mirror(root->left);
         mirror(root->right);
+        display(root);
     }
 
     node* search(node* root, int ele)
@@ -115,29 +120,48 @@ public:
 int main()
 {
     BST b;
-    b.root = b.insert(b.root, 11);
-    b.insert(b.root, 14);
-    b.insert(b.root, 10);
-    b.insert(b.root, 5);
-    b.insert(b.root, 1);
+    int ch,ele;
 
-    cout << "Binary Search Tree:" << endl;
-    b.display(b.root);
-    cout << endl;
-
-    cout << "Number of nodes in the longest path from root: " << b.longest(b.root) << endl;
-
-    node* minimum = b.min(b.root);
-    cout << "Minimum data value found in the tree: " << minimum->data << endl;
-
-    cout << "Mirror of the tree:" << endl;
-    b.mirror(b.root);
-    b.display(b.root);
-    cout << endl;
-
-    b.search(b.root,11);
-    b.search(b.root,100);
-    cout << endl;
-
+    do
+    {
+        cout<<"What do you want to do?"<<endl;
+        cout<<"1.Insert node\n2.Delete node\n3.Display tree in ascending order\n4.Mirror tree\n5.Height of tree\n6.Least Value\n7.Search\n8.Exit"<<endl;
+        cin>>ch;
+        switch (ch)
+        {
+        case 1:
+            cout<<"Enter number to insert:"<<endl;
+            cin>>ele;
+            b.insert(b.root,ele);
+            break;
+        case 2:
+            cout<<"Enter number to delete:"<<endl;
+            cin>>ele;
+            b.delet(b.root,ele);
+            break;
+            break;
+        case 3:
+            b.display(b.root);
+            break;
+        case 4:
+            b.mirror(b.root);
+            break;
+        case 5:
+            cout<<"Height of tree is : "<<b.longest(b.root)<<endl;
+            break;
+        case 6:
+            cout<<"Minimum value in tree is: "<<b.min(b.root)<<endl;
+            break;
+        case 7:
+            cout<<"Enter element to search:"<<endl;
+            cin>>ele;
+            b.search(b.root,ele);
+            break;
+        
+        default:
+            break;
+        }
+    } while (ch!=8);
+    
     return 0;
 }
